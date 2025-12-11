@@ -1,4 +1,4 @@
-package org.jetbrains.plugins.template
+package com.github.mattque04.hakatonproba
 
 import com.intellij.DynamicBundle
 import org.jetbrains.annotations.NonNls
