@@ -12,4 +12,12 @@
         <toolWindow factoryClass="com.github.mattque04.hakatonproba.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
         <postStartupActivity implementation="com.github.mattque04.hakatonproba.startup.MyProjectActivity" />
     </extensions>
+    
+    <actions>
+        <action id = "openai test"
+                class = "com.github.mattque04.hakatonproba.openai_plugin_test"
+                text = "OPENAI TEST">
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </action>
+    </actions>
 </idea-plugin>
