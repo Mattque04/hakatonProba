@@ -1,5 +1,7 @@
-package com.github.mattque04.hakatonproba.ui
+package com.github.mattque04.hakatonproba.UI
 
+import com.github.mattque04.hakatonproba.UI.ControllerImpl
+import com.github.mattque04.hakatonproba.UI.MainActions
 import com.intellij.ui.components.JBPanel
 import java.awt.Font
 import javax.swing.Box
@@ -14,7 +16,7 @@ import com.intellij.ui.dsl.builder.AlignX
 import com.intellij.ui.dsl.builder.panel
 
 class MainView(
-    private val controller: ChatController
+    private val actions: MainActions
 ) {
     fun component(): JComponent = panel {
         group("Function context") {
@@ -26,19 +28,19 @@ class MainView(
 
             row {
                 button("Summarize changes") {
-                    controller.onActionSelected("Summarize changes")
+                    actions.onActionSelected("Summarize changes")
                 }.align(AlignX.FILL)
             }.topGap(TopGap.MEDIUM).comment("AI summary of changes affecting this function in the selected time range.")
 
             row {
                 button("Compare last N commits") {
-                    controller.onActionSelected("Compare last N commits")
+                    actions.onActionSelected("Compare last N commits")
                 }.align(AlignX.FILL)
             }.topGap(TopGap.MEDIUM)
 
             row {
                 button("Show timeline") {
-                    controller.onActionSelected("Show timeline")
+                    actions.onActionSelected("Show timeline")
                 }.align(AlignX.FILL)
             }.topGap(TopGap.MEDIUM)
         }

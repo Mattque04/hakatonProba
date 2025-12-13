@@ -1,5 +1,10 @@
-package com.github.mattque04.hakatonproba.ui
+package com.github.mattque04.hakatonproba.UI
 
+import com.github.mattque04.hakatonproba.UI.ChatActions
+import com.github.mattque04.hakatonproba.UI.ChatView
+import com.github.mattque04.hakatonproba.UI.MainActions
+import com.github.mattque04.hakatonproba.UI.UiNavigator
+import com.github.mattque04.hakatonproba.UI.MainView
 import com.intellij.ui.components.JBPanel
 import java.awt.CardLayout
 import javax.swing.JComponent
@@ -11,7 +16,8 @@ class ToolWindowRoot : UiNavigator {
 
     private lateinit var chatView: ChatView
 
-    private val controller = object : ChatController {
+    private val controller = object : MainActions, ChatActions {
+
         override fun onActionSelected(actionName: String) {
             chatView.append("System: Started action -> $actionName\n")
             chatView.append("System: (pretend we ran a job and got a summary)\n\n")
