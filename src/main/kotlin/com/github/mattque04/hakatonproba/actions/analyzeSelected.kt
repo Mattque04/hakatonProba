@@ -2,6 +2,7 @@ package com.github.mattque04.hakatonproba.actions
 
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
+import java.io.File
 
 import com.intellij.psi.util.PsiTreeUtil
 import org.jetbrains.kotlin.psi.KtClass
@@ -60,24 +61,4 @@ fun getPsiAtCaret(e: AnActionEvent): String? {
         $elementText
     """.trimIndent()
     return ""
-}
-
-
-class ShowSelectedPsiAction : AnAction("Show Selected PSI") {
-    override fun actionPerformed(e: AnActionEvent) {
-        val description = getPsiAtCaret(e)
-        if (description != null) {
-            Messages.showInfoMessage(
-                e.project,
-                description,
-                "Selected PSI Element"
-            )
-        } else {
-            Messages.showWarningDialog(
-                e.project,
-                "No PSI element (function/class/property) was detected in your selection.",
-                "No Element Found"
-            )
-        }
-    }
 }
