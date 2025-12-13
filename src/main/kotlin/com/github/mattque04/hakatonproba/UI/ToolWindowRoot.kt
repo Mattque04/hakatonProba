@@ -1,10 +1,6 @@
 package com.github.mattque04.hakatonproba.UI
 
-import com.github.mattque04.hakatonproba.UI.ChatActions
-import com.github.mattque04.hakatonproba.UI.ChatView
-import com.github.mattque04.hakatonproba.UI.MainActions
-import com.github.mattque04.hakatonproba.UI.UiNavigator
-import com.github.mattque04.hakatonproba.UI.MainView
+
 import com.intellij.ui.components.JBPanel
 import java.awt.CardLayout
 import javax.swing.JComponent
