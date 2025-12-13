@@ -23,7 +23,7 @@ class ChatView(
 
     private fun topBar(): JComponent =
         JPanel(FlowLayout(FlowLayout.LEFT)).apply {
-            add(JButton("← Back").apply { addActionListener { navigator.showMain() } })
+            add(JButton("← Back").apply { addActionListener { navigator.showChooser() } })
             add(JLabel("CHAT").apply { font = font.deriveFont(Font.BOLD) })
         }
 }

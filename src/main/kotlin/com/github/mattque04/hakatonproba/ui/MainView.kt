@@ -20,20 +20,20 @@ class MainView(
             separator()
 
             row {
-                button("Summarize changes") {
-                    actions.onActionSelected("Summarize changes")
+                button("Compare last 10 commits") {
+                    actions.onActionSelected("Compare last 10 commits")
                 }.align(AlignX.FILL)
             }.topGap(TopGap.MEDIUM)//.comment("AI summary of changes affecting this function in the selected time range.")
 
             row {
-                button("Compare last N commits") {
-                    actions.onActionSelected("Compare last N commits")
+                button("Give me rebase head for this branch") {
+                    actions.onActionSelected("Give me rebase head for this branch")
                 }.align(AlignX.FILL)
             }.topGap(TopGap.MEDIUM)
 
             row {
-                button("Show timeline") {
-                    actions.onActionSelected("Show timeline")
+                button("Summers me last pull request on main") {
+                    actions.onActionSelected("Summers me last pull request on main")
                 }.align(AlignX.FILL)
             }.topGap(TopGap.MEDIUM)
         }

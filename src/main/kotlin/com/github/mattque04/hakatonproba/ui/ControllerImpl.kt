@@ -12,6 +12,7 @@ class ControllerImpl(
     }
 
     override fun onSendMessage(text: String) {
+
         // kasnije: obrada poruke
     }
 }
