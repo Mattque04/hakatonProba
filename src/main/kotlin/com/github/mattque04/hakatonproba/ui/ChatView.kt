@@ -1,4 +1,4 @@
-package com.github.mattque04.hakatonproba.UI
+package com.github.mattque04.hakatonproba.ui
 
 import java.awt.BorderLayout
 import java.awt.FlowLayout
