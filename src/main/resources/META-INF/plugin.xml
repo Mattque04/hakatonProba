@@ -15,7 +15,7 @@
     
     <actions>
         <action id = "openai test"
-                class = "com.github.mattque04.hakatonproba.openai_plugin_test"
+                class = "com.github.mattque04.hakatonproba.gpt.openai_plugin_test"
                 text = "OPENAI TEST">
             <add-to-group group-id="EditorPopupMenu" anchor="last"/>
         </action>
