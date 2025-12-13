@@ -10,7 +10,7 @@ class OpenAi {
         .apiKey("")
         .build();
 
-    fun call(instructions: String, input: String, model: ChatModel, temperature: Double = 1.0): String {
+    fun call(instructions: String, input: String, model: ChatModel, temperature: Double? = 1.0): String {
         val params = ResponseCreateParams.Companion.builder()
             .instructions(instructions)
             .input(input)
@@ -20,7 +20,7 @@ class OpenAi {
 
         val response = client.responses().create(params);
 
-        return response.output().get(0).message().get().content().get(0).outputText().get().text();
+        return response.output().last().message().get().content().get(0).outputText().get().text();
     }
 
 }

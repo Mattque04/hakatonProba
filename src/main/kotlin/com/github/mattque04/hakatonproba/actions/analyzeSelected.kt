@@ -1,5 +1,7 @@
 package com.github.mattque04.hakatonproba.actions
 
+import com.github.mattque04.hakatonproba.openai.OpenAi
+import com.github.mattque04.hakatonproba.summary_generator.SummaryGenerator
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
 
@@ -26,9 +28,9 @@ fun getPsiAtCaret(e: AnActionEvent): PsiElement? {
         PsiVariable::class.java
     )
 
-    var element = psiFile.findElementAt(offset)?.parent
+    var element = psiFile.findElementAt(offset)
 
-    if (!validElementTypes.any { it.isInstance(element) })
+    if (!validElementTypes.any { it.isInstance(element!!.parent) })
         return null
 
     return element
@@ -39,10 +41,18 @@ class ShowSelectedPsiAction : AnAction("Show Selected PSI") {
     override fun actionPerformed(e: AnActionEvent) {
         val element = getPsiAtCaret(e)
         if (element != null) {
+
+            var summary = SummaryGenerator(OpenAi()).generate(
+                e.project!!.basePath!!,
+                element.containingFile.virtualFile.path,
+                element.text,
+                3
+            )
+
             Messages.showWarningDialog(
                 e.project,
-                this.getRelativePath(e!!.project!!.basePath!!, element.containingFile.virtualFile.path),
-                "Element found"
+                summary,
+                "Summary"
             )
         } else {
             Messages.showWarningDialog(
