@@ -1,10 +1,11 @@
 package com.github.mattque04.hakatonproba.summary_generator
 import com.github.mattque04.hakatonproba.cli.Cli
 import com.github.mattque04.hakatonproba.openai.OpenAi
+import com.github.mattque04.hakatonproba.openai.OpenAi.OpenAiResponse
 
 class SummaryGenerator(var openAi: OpenAi) {
 
-    fun generate(projectPath: String, filePath: String, name: String, commitCount: Int): String {
+    fun generate(projectPath: String, filePath: String, name: String, commitCount: Int): OpenAiResponse? {
         val cli = Cli(projectPath)
 
         val grepCommand = arrayOf(
@@ -14,14 +15,14 @@ class SummaryGenerator(var openAi: OpenAi) {
         )
 
         val grepOutput = cli.runCommand(*grepCommand)
-        if (grepOutput.isEmpty()) return "No matches found for '$name'."
+        if (grepOutput.isEmpty()) return null
 
         val matchedFiles = grepOutput.lines()
             .filter { it.startsWith("HEAD:") }
             .map { it.removePrefix("HEAD:").trim() }
             .filter { it.isNotEmpty() }
 
-        if (matchedFiles.isEmpty()) return "No files matched for '$name'."
+        if (matchedFiles.isEmpty()) return null
 
         val diffs = StringBuilder()
         val hash = "HEAD~$commitCount"
@@ -55,6 +56,7 @@ Summerise for the user most important changes that occured in the definition and
             "",
             prompt,
             com.openai.models.ChatModel.GPT_5,
+            null,
             null
         )
     }

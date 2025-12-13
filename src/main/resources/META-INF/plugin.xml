@@ -24,8 +24,8 @@
         <action
                 id="com.github.mattque04.hakatonproba.actions.ShowSelectedPsiAction"
                 class="com.github.mattque04.hakatonproba.actions.ShowSelectedPsiAction"
-                text="Show Selected PSI"
-                description="Displays info about the selected PSI element (class, function, or property)">
+                text="Show changes summary"
+                description="Displays info changes summary about the selected PSI element (class, function, or property)">
             <add-to-group group-id="EditorPopupMenu" anchor="last"/>
         </action>
         <action

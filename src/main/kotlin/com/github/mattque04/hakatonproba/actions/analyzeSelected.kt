@@ -53,7 +53,7 @@ class ShowSelectedPsiAction : AnAction("Show Selected PSI") {
 
             Messages.showWarningDialog(
                 e.project,
-                summary,
+                summary!!.result,
                 "Summary"
             )
         } else {
