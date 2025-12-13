@@ -7,8 +7,9 @@ import javax.swing.*
 
 class ChatView(
     private val navigator: UiNavigator,
-    private val chatActions: ChatActions
-) {
+    private var chatActions: ChatActions
+)
+{
     private val historyView = ChatHistoryView()
     private val inputView = ChatInputView(chatActions)
 
@@ -20,6 +21,11 @@ class ChatView(
         }
 
     fun append(text: String) = historyView.append(text)
+
+
+    fun setActions(actions: ChatActions) {
+        this.chatActions = actions
+    }
 
     private fun topBar(): JComponent =
         JPanel(FlowLayout(FlowLayout.LEFT)).apply {

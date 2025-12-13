@@ -1,4 +1,4 @@
-package com.github.mattque04.hakatonproba.ui
+/*package com.github.mattque04.hakatonproba.ui
 
 
 import javax.swing.JComponent
@@ -39,3 +39,5 @@ class MainView(
         }
     }
 }
+
+ */
