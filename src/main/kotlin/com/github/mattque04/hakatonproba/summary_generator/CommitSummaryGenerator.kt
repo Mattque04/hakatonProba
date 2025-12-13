@@ -2,16 +2,17 @@ package com.github.mattque04.hakatonproba.summary_generator
 
 import com.github.mattque04.hakatonproba.cli.Cli
 import com.github.mattque04.hakatonproba.openai.OpenAi
+import com.github.mattque04.hakatonproba.openai.OpenAi.OpenAiResponse
 
 class CommitSummaryGenerator(var openAi: OpenAi) {
-    fun generate(projectPath: String, hash_id: String): String {
+    fun generate(projectPath: String, hash_id: String): OpenAiResponse? {
         val cli = Cli(projectPath)
 
         val command = arrayOf("git", "show", "--diff-filter=drc", hash_id)
         val diffOutput = cli.runCommand(*command)
 
         if (diffOutput.isEmpty()) {
-            return "No diff output found for commit $hash_id."
+            return null
         }
 
         val prompt = """
@@ -32,6 +33,7 @@ Summarize this commit for the user.
             "",
             prompt,
             com.openai.models.ChatModel.GPT_5,
+            null,
             null
         )
     }

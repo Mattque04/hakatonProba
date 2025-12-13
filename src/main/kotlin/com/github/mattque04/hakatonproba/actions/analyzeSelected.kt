@@ -83,7 +83,7 @@ class ShowStefansClass : AnAction("Test Stefan") {
 
             Messages.showWarningDialog(
                 e.project,
-                summary,
+                summary!!.result,
                 "Summary"
             )
         }
@@ -99,7 +99,7 @@ class ShowStefansClass2 : AnAction("Test Stefan 2") {
 
         Messages.showWarningDialog(
             e.project,
-            summary,
+            summary!!.result,
             "Summary"
         )
     }
