@@ -1,6 +1,8 @@
 package com.github.mattque04.hakatonproba.actions
 
 import com.github.mattque04.hakatonproba.openai.OpenAi
+import com.github.mattque04.hakatonproba.summary_generator.CommitSummaryGenerator
+import com.github.mattque04.hakatonproba.summary_generator.RebaseSummaryGenerator
 import com.github.mattque04.hakatonproba.summary_generator.SummaryGenerator
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
@@ -71,5 +73,34 @@ class ShowSelectedPsiAction : AnAction("Show Selected PSI") {
         } else {
             null
         }
+    }
+}
+class ShowStefansClass : AnAction("Test Stefan") {
+    override fun actionPerformed(e: AnActionEvent) {
+
+            var summary = RebaseSummaryGenerator(OpenAi()).generate(e.project!!.basePath!!, "master")
+
+
+            Messages.showWarningDialog(
+                e.project,
+                summary,
+                "Summary"
+            )
+        }
+    }
+
+
+
+class ShowStefansClass2 : AnAction("Test Stefan 2") {
+    override fun actionPerformed(e: AnActionEvent) {
+
+        var summary = CommitSummaryGenerator(OpenAi()).generate(e.project!!.basePath!!, "bcd2476bcc6e3e7e05ff2668596a49d8d8c2d405")
+
+
+        Messages.showWarningDialog(
+            e.project,
+            summary,
+            "Summary"
+        )
     }
 }
