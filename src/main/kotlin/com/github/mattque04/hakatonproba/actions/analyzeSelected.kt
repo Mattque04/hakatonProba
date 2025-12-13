@@ -59,6 +59,7 @@ fun getPsiAtCaret(e: AnActionEvent): String? {
         -------------------------
         $elementText
     """.trimIndent()
+    return ""
 }
 
 
