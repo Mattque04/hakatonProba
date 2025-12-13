@@ -5,7 +5,7 @@
     <vendor>mattque04</vendor>
 
     <depends>com.intellij.modules.platform</depends>
-
+    <depends>com.intellij.java</depends>
     <resource-bundle>messages.MyBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
@@ -17,6 +17,15 @@
         <action id = "openai test"
                 class = "com.github.mattque04.hakatonproba.gpt.openai_plugin_test"
                 text = "OPENAI TEST">
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </action>
+    </actions>
+    <actions>
+        <action
+                id="com.github.mattque04.hakatonproba.actions.ShowSelectedPsiAction"
+                class="com.github.mattque04.hakatonproba.actions.ShowSelectedPsiAction"
+                text="Show Selected PSI"
+                description="Displays info about the selected PSI element (class, function, or property)">
             <add-to-group group-id="EditorPopupMenu" anchor="last"/>
         </action>
     </actions>
