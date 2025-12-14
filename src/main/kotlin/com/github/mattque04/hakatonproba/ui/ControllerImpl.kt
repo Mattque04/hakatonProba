@@ -34,7 +34,9 @@ class ControllerImpl(
             maxCommits
         )
 
+        chatView.clear()
         chatView.append(summary!!.result)
+        chatView.responseId = summary.responseId
         navigator.showChat()
     }
 

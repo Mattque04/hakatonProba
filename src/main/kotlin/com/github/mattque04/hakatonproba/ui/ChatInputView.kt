@@ -17,6 +17,7 @@ import javax.swing.event.DocumentListener
 
 class ChatInputView(
     private val actions: ChatActions,
+    private val chatView: ChatView,
     private val minRows: Int = 2,
     private val maxRows: Int = 6
 ) {
@@ -85,6 +86,7 @@ class ChatInputView(
     private fun send() {
         val text = input.text.trim()
         if (text.isNotEmpty()) {
+            chatView.addUserMessage(text)
             actions.onSendMessage(text)
             input.text = ""
             // reset back to min height after send

@@ -16,7 +16,12 @@ class ChatHistoryView {
     fun component(): JComponent = JBScrollPane(history)
 
     fun append(text: String) {
+        history.append("\n<<<<---------------------------------\n")
         history.append(text)
         history.caretPosition = history.document.length
+    }
+
+    fun clear() {
+        history.text = ""
     }
 }
