@@ -46,7 +46,9 @@ class ControllerImpl(
             ProjectManager.getInstance().openProjects.firstOrNull()!!.basePath!!,
             targetBranch,
         )
+        chatView.clear()
         chatView.append(summary!!.result)
+        chatView.responseId = summary.responseId
         navigator.showChat()
     }
 
@@ -56,7 +58,9 @@ class ControllerImpl(
                 ProjectManager.getInstance().openProjects.firstOrNull()!!.basePath!!,
             commitId,
         )
+        chatView.clear()
         chatView.append(summary!!.result)
+        chatView.responseId = summary.responseId
         navigator.showChat()
     }
 }
