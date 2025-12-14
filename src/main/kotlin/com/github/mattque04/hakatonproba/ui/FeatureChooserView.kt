@@ -9,8 +9,8 @@ import javax.swing.JLabel
 class FeatureChooserView(
     private val navigator: UiNavigator
 ) {
-    private val featureBox = JComboBox(arrayOf("Summarize", "Compare", "Summarize commit"))
-    private val descLabel = JLabel("AI summary of changes affecting the selected function in a time range.")
+    private val featureBox = JComboBox(arrayOf("Summarize", "Potentional conficts", "Summarize commit"))
+    private val descLabel = JLabel("AI tools for understanding code")
 
     fun component(): JComponent = panel {
         group("Git Summary Assistant") {
@@ -21,7 +21,7 @@ class FeatureChooserView(
                 button("Open") {
                     when (featureBox.selectedItem as String) {
                         "Summarize" -> navigator.showSummarize()
-                        "Compare" -> navigator.showCompare()
+                        "Potentional conficts" -> navigator.showCompare()
                         "Summarize commit" -> navigator.showTimeline()
                     }
                 }.align(AlignX.FILL)
@@ -30,9 +30,9 @@ class FeatureChooserView(
     }.also {
         featureBox.addActionListener {
             descLabel.text = when (featureBox.selectedItem as String) {
-                "Summarize" -> "AI summary of changes affecting the selected function in a time range."
-                "Compare" -> "Compare how the selected function changed across last N commits."
-                else -> "Timeline view of commits touching the selected function in last N days."
+                "Summarize" -> "AI summery of  changes for function in past commits"
+                "Potentional conficts" -> "Compare potential conflicts current branch with chosen branch."
+                else -> "Summarize changes for choosen branch has been reached."
             }
         }
     }

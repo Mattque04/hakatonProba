@@ -28,17 +28,10 @@ class SummarizeFeatureView(
                 row { comment("Pick a function in the editor, then run summary.") }
             }
 
-            lateinit var daysField: Cell<JBTextField>
             lateinit var maxCommitsField: Cell<JBTextField>
 
             group("Parameters") {
-                row("Days back:") {
-                    daysField = intTextField(7..365)
-                        .bindIntText(
-                            getter = { daysBack },
-                            setter = { daysBack = it }
-                        )
-                }
+
                 row("Max commits:") {
                     maxCommitsField = intTextField(1..200)
                         .bindIntText(
@@ -63,7 +56,7 @@ class SummarizeFeatureView(
                             ReadAction.run<RuntimeException> {
                                 val req = ActionRequest.Summarize(
                                     GlobalVariables.selectedElement!!,
-                                    daysBack =  daysField.component.text.toInt(),
+                                    daysBack =  30,
                                     maxCommits = maxCommitsField.component.text.toInt(),
                                 )
                                 actions.onActionSelected(req)

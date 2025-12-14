@@ -2,11 +2,11 @@ package com.github.mattque04.hakatonproba.ui
 
 enum class Feature(val label: String, val description: String) {
     SUMMARIZE(
-        "Summarize changes for function",
+        "Summarize changes for function in past commits",
         "AI summary of changes affecting the selected function in the chosen time range."
     ),
     COMPARE(
-        "Compare current branch with choosen branch",
+        "Compare potential conflicts current branch with chosen branch",
         "Show how the current branch can be in conflict with choosen branch."
     ),
     SUMMARIZE_COMMIT(

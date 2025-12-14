@@ -40,7 +40,7 @@ fun getPsiAtCaret(e: AnActionEvent): PsiElement? {
 }
 
 
-class ShowSelectedPsiAction : AnAction("Show Selected PSI") {
+class ShowSelectedPsiAction : AnAction("Choose selected element") {
     override fun actionPerformed(e: AnActionEvent) {
         val element = getPsiAtCaret(e)
         if (element != null) {

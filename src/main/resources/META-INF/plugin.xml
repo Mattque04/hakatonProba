@@ -12,34 +12,12 @@
         <toolWindow factoryClass="com.github.mattque04.hakatonproba.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
         <postStartupActivity implementation="com.github.mattque04.hakatonproba.startup.MyProjectActivity" />
     </extensions>
-    
-    <actions>
-        <action id = "openai test"
-                class = "com.github.mattque04.hakatonproba.gpt.openai_plugin_test"
-                text = "OPENAI TEST">
-            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
-        </action>
-    </actions>
     <actions>
         <action
                 id="com.github.mattque04.hakatonproba.actions.ShowSelectedPsiAction"
                 class="com.github.mattque04.hakatonproba.actions.ShowSelectedPsiAction"
                 text="Show changes summary"
                 description="Displays info changes summary about the selected PSI element (class, function, or property)">
-            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
-        </action>
-        <action
-                id="com.github.mattque04.hakatonproba.actions.ShowStefansClass"
-                class="com.github.mattque04.hakatonproba.actions.ShowStefansClass"
-                text="test Stefan"
-                description="test this">
-            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
-        </action>
-        <action
-                id="com.github.mattque04.hakatonproba.actions.ShowStefansClass2"
-                class="com.github.mattque04.hakatonproba.actions.ShowStefansClass2"
-                text="test Stefan 2"
-                description="test this 2">
             <add-to-group group-id="EditorPopupMenu" anchor="last"/>
         </action>
     </actions>
