@@ -1,6 +1,8 @@
 package com.github.mattque04.hakatonproba.ui
 
-import com.intellij.ui.components.JBLabel
+import com.intellij.openapi.application.ReadAction
+import com.intellij.openapi.progress.ProgressIndicator
+import com.intellij.openapi.progress.Task
 import com.intellij.ui.components.JBTextField
 import com.intellij.ui.dsl.builder.AlignX
 import com.intellij.ui.dsl.builder.Cell
@@ -9,7 +11,6 @@ import com.intellij.ui.dsl.builder.bindIntText
 import com.intellij.ui.dsl.builder.panel
 import javax.swing.JComponent
 import javax.swing.JLabel
-import kotlin.Int
 
 class SummarizeFeatureView(
     private val navigator: UiNavigator,
@@ -55,13 +56,21 @@ class SummarizeFeatureView(
 
             row {
                 button("Run summary") {
-                    val req = ActionRequest.Summarize(
-                        GlobalVariables.selectedElement!!,
-                        daysBack =  daysField.component.text.toInt(),
-                        maxCommits = maxCommitsField.component.text.toInt(),
-                    )
-                    actions.onActionSelected(req)
-                    navigator.showChat()
+                    object : Task.Backgroundable(
+                        GlobalVariables.selectedElement!!.project, "My Background Job", false
+                    ) {
+                        override fun run(indicator: ProgressIndicator) {
+                            ReadAction.run<RuntimeException> {
+                                val req = ActionRequest.Summarize(
+                                    GlobalVariables.selectedElement!!,
+                                    daysBack =  daysField.component.text.toInt(),
+                                    maxCommits = maxCommitsField.component.text.toInt(),
+                                )
+                                actions.onActionSelected(req)
+                                navigator.showChat()
+                            }
+                        }
+                    }.queue()
                 }.align(AlignX.FILL)
             }.topGap(TopGap.MEDIUM)
         }
