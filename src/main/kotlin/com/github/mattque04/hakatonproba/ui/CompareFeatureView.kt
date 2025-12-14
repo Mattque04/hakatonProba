@@ -1,6 +1,7 @@
 package com.github.mattque04.hakatonproba.ui
 
 import com.github.mattque04.hakatonproba.core.GitUtils
+import com.intellij.openapi.project.ProjectManager
 import com.intellij.ui.components.JBTextField
 import com.intellij.ui.dsl.builder.AlignX
 import com.intellij.ui.dsl.builder.Cell
@@ -15,14 +16,15 @@ class CompareFeatureView(
 ) {
     fun component(): JComponent = panel {
         group("Compare") {
-            // 1️⃣ Dugme za povratak
+            //Dugme za povratak
             row {
                 button("← Back") { navigator.showChooser() }
             }
 
-            // 2️⃣ Dropdown sa svim granama
+            //Dropdown sa svim granama
             val branches = GitUtils.getAllBranches(
-                System.getProperty("user.dir")
+                ProjectManager.getInstance().openProjects.firstOrNull()!!.basePath!!
+
             )
             val comboModel = javax.swing.DefaultComboBoxModel(branches.toTypedArray())
             val branchDropdown = javax.swing.JComboBox(comboModel)
@@ -31,7 +33,7 @@ class CompareFeatureView(
                 cell(branchDropdown)
             }
 
-            // 3️⃣ Dugme Compare
+            //Dugme Compare
             row {
                 button("Compare") {
                     val selectedBranch = branchDropdown.selectedItem as? String ?: return@button

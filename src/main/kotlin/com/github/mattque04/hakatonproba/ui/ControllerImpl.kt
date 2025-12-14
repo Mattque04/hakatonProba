@@ -2,6 +2,7 @@ package com.github.mattque04.hakatonproba.ui
 
 import com.github.mattque04.hakatonproba.openai.OpenAi
 import com.github.mattque04.hakatonproba.summary_generator.CommitSummaryGenerator
+import com.github.mattque04.hakatonproba.summary_generator.RebaseSummaryGenerator
 import com.github.mattque04.hakatonproba.summary_generator.SummaryGenerator
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.project.ProjectManager
@@ -41,17 +42,21 @@ class ControllerImpl(
     }
 
     private fun runCompare(targetBranch: String) {
-        chatView.append("System: Compare started (targetBranch=$targetBranch)\n\n")
+        var summary = RebaseSummaryGenerator(OpenAi()).generate(
+            ProjectManager.getInstance().openProjects.firstOrNull()!!.basePath!!,
+            targetBranch,
+        )
+        chatView.append(summary!!.result)
         navigator.showChat()
     }
 
     private fun runTimeline(commitId: String) {
-        var summarized =
+        var summary =
             CommitSummaryGenerator(OpenAi()).generate(
                 ProjectManager.getInstance().openProjects.firstOrNull()!!.basePath!!,
             commitId,
         )
-        chatView.append(summarized!!.result)
+        chatView.append(summary!!.result)
         navigator.showChat()
     }
 }

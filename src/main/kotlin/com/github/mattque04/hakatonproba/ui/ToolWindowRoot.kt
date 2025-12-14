@@ -1,6 +1,7 @@
 package com.github.mattque04.hakatonproba.ui
 
 import com.github.mattque04.hakatonproba.core.GitUtils
+import com.intellij.openapi.project.ProjectManager
 import com.intellij.ui.components.JBPanel
 import java.awt.CardLayout
 import javax.swing.JComponent
@@ -19,20 +20,20 @@ class ToolWindowRoot : UiNavigator {
     private lateinit var timeline: TimelineFeatureView
 
     fun component(): JComponent {
-        // 1) napravi chatView sa privremenim actions (biće zamenjeno odmah posle)
+        //napravi chatView sa privremenim actions (biće zamenjeno odmah posle)
         val tmpActions = object : ChatActions {
             override fun onSendMessage(text: String) { /* ignore until wired */ }
         }
         chatView = ChatView(this, tmpActions)
 
-        // 2) sad možeš da napraviš pravi controller
+        //sad možeš da napraviš pravi controller
         controller = ControllerImpl(this, chatView)
 
-        // 3) re-wire chat actions u ChatView (treba mala izmena u ChatView, vidi ispod)
+        //re-wire chat actions u ChatView (treba mala izmena u ChatView, vidi ispod)
         chatView.setActions(controller)
 
 
-        // 4) feature view-ovi dobijaju MainActions = controller
+        //feature view-ovi dobijaju MainActions = controller
         chooser = FeatureChooserView(this)
         compare = CompareFeatureView(this, controller)
         timeline = TimelineFeatureView(this, controller)
@@ -50,22 +51,23 @@ class ToolWindowRoot : UiNavigator {
 
     override fun showChooser() = cards.show(root, "chooser")
     override fun showSummarize() {
-        summarize.setFunctionLabel(GlobalVariables.selectedElement!!.text!!)
+        summarize.setFunctionLabel(GlobalVariables.selectedElement?.text?: "not selected")
         cards.show(root, "summarize")
     }
     override fun showCompare() {
 
-        // 1️⃣ Dobavi putanju projekta
-        val projectPath = System.getProperty("user.dir")
+        //Dobavi putanju projekta
+        val projectPath = ProjectManager.getInstance().openProjects.firstOrNull()!!.basePath!!
 
-        // 2️⃣ Učitaj sve grane
+
+        //Učitaj sve grane
         val branches = GitUtils.getAllBranches(projectPath)
 
-        // 3️⃣ Napravi dropdown
+        //Napravi dropdown
         val comboModel = javax.swing.DefaultComboBoxModel(branches.toTypedArray())
         val branchDropdown = javax.swing.JComboBox(comboModel)
 
-        // 4️⃣ Dodaj u UI (primer)
+        //Dodaj u UI
         root.add(branchDropdown)
         root.revalidate()
         root.repaint()

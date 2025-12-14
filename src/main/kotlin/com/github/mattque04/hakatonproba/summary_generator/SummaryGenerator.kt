@@ -55,7 +55,7 @@ Summerise for the user most important changes that occured in the definition and
         return this.openAi.call(
             "",
             prompt,
-            com.openai.models.ChatModel.GPT_5,
+            com.openai.models.ChatModel.GPT_4O_MINI,
             null,
             null
         )

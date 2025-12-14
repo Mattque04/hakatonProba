@@ -24,7 +24,7 @@ Furthermore, if the differences are huge, abstract and summerise them in few sen
         return this.openAi.call(
             "",
             prompt,
-            com.openai.models.ChatModel.GPT_5,
+            com.openai.models.ChatModel.GPT_4O_MINI,
             null,
             null
         )

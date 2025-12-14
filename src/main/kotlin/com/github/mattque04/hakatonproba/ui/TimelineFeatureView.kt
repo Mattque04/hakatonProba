@@ -17,18 +17,18 @@ class TimelineFeatureView(
     fun component(): JComponent = panel {
         group("Commit Summarizer") {
 
-            // 1️⃣ Back button
+            //Back button
             row {
                 button("← Back") { navigator.showChooser() }
             }
 
-            // 2️⃣ Input for commit hash
+            //Input for commit hash
             lateinit var commitField: Cell<JBTextField>
             row("Commit ID / Hash:") {
                 commitField = textField()
             }
 
-            // 3️⃣ Generate summary button
+            //Generate summary button
             row {
                 button("Generate Summary") {
                     val commitId = commitField.component.text.trim()

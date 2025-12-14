@@ -32,7 +32,7 @@ Summarize this commit for the user.
         return this.openAi.call(
             "",
             prompt,
-            com.openai.models.ChatModel.GPT_5,
+            com.openai.models.ChatModel.GPT_4O_MINI,
             null,
             null
         )
