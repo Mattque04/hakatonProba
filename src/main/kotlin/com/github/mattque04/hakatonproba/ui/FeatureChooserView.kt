@@ -30,7 +30,7 @@ class FeatureChooserView(
     }.also {
         featureBox.addActionListener {
             descLabel.text = when (featureBox.selectedItem as String) {
-                "Summarize" -> "AI summery of  changes for function in past commits"
+                "Summarize" -> "Follow element changes through commits"
                 "Potentional conficts" -> "Compare potential conflicts current branch with chosen branch."
                 else -> "Summarize changes for choosen branch has been reached."
             }

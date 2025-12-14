@@ -1,5 +1,9 @@
 package com.github.mattque04.hakatonproba.ui
 
+import com.intellij.openapi.application.ReadAction
+import com.intellij.openapi.progress.ProgressIndicator
+import com.intellij.openapi.progress.Task
+import com.intellij.openapi.project.ProjectManager
 import com.intellij.ui.components.JBTextField
 import com.intellij.ui.dsl.builder.AlignX
 import com.intellij.ui.dsl.builder.Cell
@@ -31,12 +35,21 @@ class TimelineFeatureView(
             //Generate summary button
             row {
                 button("Generate Summary") {
-                    val commitId = commitField.component.text.trim()
-                    if (commitId.isEmpty()) return@button
-
-                    val req = ActionRequest.Timeline(commitId = commitId)
-                    actions.onActionSelected(req)
-                    navigator.showChat()
+                    object : Task.Backgroundable(
+                        ProjectManager.getInstance().openProjects.firstOrNull(), "My Background Job", false
+                    ) {
+                        override fun run(indicator: ProgressIndicator) {
+                            ReadAction.run<RuntimeException> {
+                                val commitId = commitField.component.text.trim()
+                                if (commitId.isEmpty()) return@run
+                                val req = ActionRequest.Timeline(
+                                    commitId = commitId
+                                )
+                                actions.onActionSelected(req)
+                                navigator.showChat()
+                            }
+                        }
+                    }.queue()
                 }.align(AlignX.FILL)
             }.topGap(TopGap.MEDIUM)
         }
