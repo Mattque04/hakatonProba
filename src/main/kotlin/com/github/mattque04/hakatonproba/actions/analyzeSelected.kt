@@ -47,7 +47,7 @@ class ShowSelectedPsiAction : AnAction("Choose selected element") {
             GlobalVariables.selectedElement = element;
 
             ToolWindowManager.getInstance(e.project!!)
-                .getToolWindow("MyToolWindow")
+                .getToolWindow("Git Assist")
                 ?.show()
         } else {
             Messages.showWarningDialog(
