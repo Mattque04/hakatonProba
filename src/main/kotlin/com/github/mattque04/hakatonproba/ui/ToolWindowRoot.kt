@@ -12,11 +12,10 @@ class ToolWindowRoot : UiNavigator {
     private lateinit var chatView: ChatView
     private lateinit var controller: ControllerImpl
 
-    private val summarize: SummarizeFeatureView
-        get() {
-            val summarize = SummarizeFeatureView(this, controller)
-            return summarize
-        }
+    private lateinit var summarize: SummarizeFeatureView
+    private lateinit var chooser: FeatureChooserView
+    private lateinit var compare: CompareFeatureView
+    private lateinit var timeline: TimelineFeatureView
 
     fun component(): JComponent {
         // 1) napravi chatView sa privremenim actions (biće zamenjeno odmah posle)
@@ -31,11 +30,12 @@ class ToolWindowRoot : UiNavigator {
         // 3) re-wire chat actions u ChatView (treba mala izmena u ChatView, vidi ispod)
         chatView.setActions(controller)
 
+
         // 4) feature view-ovi dobijaju MainActions = controller
-        val chooser = FeatureChooserView(this)
-        val summarize = SummarizeFeatureView(this, controller)
-        val compare = CompareFeatureView(this, controller)
-        val timeline = TimelineFeatureView(this, controller)
+        chooser = FeatureChooserView(this)
+        compare = CompareFeatureView(this, controller)
+        timeline = TimelineFeatureView(this, controller)
+        summarize = SummarizeFeatureView(this, controller)
 
         root.add(chooser.component(), "chooser")
         root.add(summarize.component(), "summarize")

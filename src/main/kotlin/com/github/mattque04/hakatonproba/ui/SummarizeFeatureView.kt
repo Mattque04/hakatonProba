@@ -14,7 +14,7 @@ import kotlin.Int
 class SummarizeFeatureView(
     private val navigator: UiNavigator,
     private val actions: MainActions,
-    public  var functionLabel: JLabel? = null
+    private  var functionLabel: JLabel? = null
 ) {
     var daysBack = 30
     var maxCommits = 50
@@ -55,7 +55,6 @@ class SummarizeFeatureView(
 
             row {
                 button("Run summary") {
-                    functionLabel!!.text = GlobalVariables.selectedElement!!.text;
                     val req = ActionRequest.Summarize(
                         GlobalVariables.selectedElement!!,
                         daysBack =  daysField.component.text.toInt(),
@@ -69,7 +68,7 @@ class SummarizeFeatureView(
     }
 
     public fun setFunctionLabel(text: String) {
-//        functionLabel!!.text = text
+        functionLabel!!.text = text
     }
 
 }
