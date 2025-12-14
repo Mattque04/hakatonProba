@@ -5,9 +5,10 @@ import com.openai.models.ChatModel
 import com.openai.models.responses.ResponseCreateParams
 
 class OpenAi {
-
+    private val apiKey: String = System.getenv("OPENAI_API_KEY")
+        ?: throw IllegalStateException("Missing OPENAI_API_KEY environment variable")
     var client = OpenAIOkHttpClient.Companion.builder()
-        .apiKey("")
+        .apiKey(apiKey)
         .build();
 
     fun call(instructions: String, input: String, model: ChatModel, temperature: Double? = 1.0, previousResponseId: String?): OpenAiResponse {
