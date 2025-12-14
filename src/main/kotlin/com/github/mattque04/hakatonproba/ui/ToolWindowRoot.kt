@@ -1,5 +1,6 @@
 package com.github.mattque04.hakatonproba.ui
 
+import com.github.mattque04.hakatonproba.core.GitUtils
 import com.intellij.ui.components.JBPanel
 import java.awt.CardLayout
 import javax.swing.JComponent
@@ -52,7 +53,25 @@ class ToolWindowRoot : UiNavigator {
         summarize.setFunctionLabel(GlobalVariables.selectedElement!!.text!!)
         cards.show(root, "summarize")
     }
-    override fun showCompare() = cards.show(root, "compare")
+    override fun showCompare() {
+
+        // 1️⃣ Dobavi putanju projekta
+        val projectPath = System.getProperty("user.dir")
+
+        // 2️⃣ Učitaj sve grane
+        val branches = GitUtils.getAllBranches(projectPath)
+
+        // 3️⃣ Napravi dropdown
+        val comboModel = javax.swing.DefaultComboBoxModel(branches.toTypedArray())
+        val branchDropdown = javax.swing.JComboBox(comboModel)
+
+        // 4️⃣ Dodaj u UI (primer)
+        root.add(branchDropdown)
+        root.revalidate()
+        root.repaint()
+        cards.show(root, "compare")
+
+    }
     override fun showTimeline() = cards.show(root, "timeline")
     override fun showChat() = cards.show(root, "chat")
 }

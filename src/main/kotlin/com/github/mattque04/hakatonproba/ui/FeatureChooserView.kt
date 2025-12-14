@@ -9,7 +9,7 @@ import javax.swing.JLabel
 class FeatureChooserView(
     private val navigator: UiNavigator
 ) {
-    private val featureBox = JComboBox(arrayOf("Summarize", "Compare", "Timeline"))
+    private val featureBox = JComboBox(arrayOf("Summarize", "Compare", "Summarize commit"))
     private val descLabel = JLabel("AI summary of changes affecting the selected function in a time range.")
 
     fun component(): JComponent = panel {
@@ -22,7 +22,7 @@ class FeatureChooserView(
                     when (featureBox.selectedItem as String) {
                         "Summarize" -> navigator.showSummarize()
                         "Compare" -> navigator.showCompare()
-                        "Timeline" -> navigator.showTimeline()
+                        "Summarize commit" -> navigator.showTimeline()
                     }
                 }.align(AlignX.FILL)
             }

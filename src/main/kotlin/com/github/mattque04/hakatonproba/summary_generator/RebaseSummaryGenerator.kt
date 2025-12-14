@@ -7,7 +7,7 @@ class RebaseSummaryGenerator(var openAi: OpenAi) {
     fun generate(projectPath: String, branch: String = "main"): OpenAiResponse? {
         val cli = Cli(projectPath)
 
-        val diffCommand = arrayOf("git", "diff", "--function-context", branch)
+        val diffCommand = arrayOf("git", "diff", "--function-context", "--diff-filter=drc", branch)
         val diffOutput = cli.runCommand(*diffCommand)
 
         if (diffOutput.isEmpty()) {

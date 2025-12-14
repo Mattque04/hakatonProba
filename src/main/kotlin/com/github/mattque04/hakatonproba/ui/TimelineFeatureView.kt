@@ -4,8 +4,8 @@ import com.intellij.ui.components.JBTextField
 import com.intellij.ui.dsl.builder.AlignX
 import com.intellij.ui.dsl.builder.Cell
 import com.intellij.ui.dsl.builder.TopGap
-import com.intellij.ui.dsl.builder.bindIntText
 import com.intellij.ui.dsl.builder.panel
+import javax.swing.JButton
 import javax.swing.JComponent
 
 class TimelineFeatureView(
@@ -15,30 +15,26 @@ class TimelineFeatureView(
     var daysBack = 14
 
     fun component(): JComponent = panel {
-        group("Timeline") {
-            row { button("← Back") { navigator.showChooser() } }
+        group("Commit Summarizer") {
 
-            group("Function context") {
-                row("Selected function:") { label("calculatePrice(Order)").bold() }
-                row { comment("Build a timeline of commits affecting this function.") }
-            }
-            lateinit var TimeField: Cell<JBTextField>
-
-            group("Parameters") {
-                row("Days back:") {
-                    TimeField=intTextField(1..365)
-                        .bindIntText(
-                            getter = { daysBack },
-                            setter = { daysBack = it }
-                        )
-                }
-            }
-
+            // 1️⃣ Back button
             row {
-                button("Build timeline") {
-                    val req = ActionRequest.Timeline(
-                        daysBack = TimeField.component.text.toInt(),
-                    )
+                button("← Back") { navigator.showChooser() }
+            }
+
+            // 2️⃣ Input for commit hash
+            lateinit var commitField: Cell<JBTextField>
+            row("Commit ID / Hash:") {
+                commitField = textField()
+            }
+
+            // 3️⃣ Generate summary button
+            row {
+                button("Generate Summary") {
+                    val commitId = commitField.component.text.trim()
+                    if (commitId.isEmpty()) return@button
+
+                    val req = ActionRequest.Timeline(commitId = commitId)
                     actions.onActionSelected(req)
                     navigator.showChat()
                 }.align(AlignX.FILL)
